@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quién es Quién? - Dr. STONE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>¿Quién es Quién? — Dr. STONE</h1>
+        <div class="top-controls">
+            <div class="mode-selector">
+                <button id="btn-mode-pvp" class="active">Modo 2 Jugadores (Tablero)</button>
+                <button id="btn-mode-cpu">Modo Contra la Máquina</button>
+            </div>
+            <label class="toggle-fairy">
+                <input type="checkbox" id="toggle-include-alts" checked>
+                <span>Incluir formas alternativas y OC (110)</span>
+            </label>
+        </div>
+    </header>
+
+    <main class="game-container">
+        <!-- PANEL IZQUIERDO: Filtros y Preguntas de Sí / No -->
+        <aside class="control-panel">
+            <!-- Sección Tu Personaje (Solo visible en PvP) -->
+            <div id="pvp-secret-box" class="secret-card">
+                <h3>Tu Personaje Secreto</h3>
+                <div id="secret-character-display" class="secret-info">
+                    <p>Pulsa el botón para asignarte uno</p>
+                </div>
+                <button id="btn-randomize-secret" class="btn-primary">🎲 Randomizar mi Personaje</button>
+            </div>
+
+            <!-- Sección Contra la Máquina (Solo visible en CPU) -->
+            <div id="cpu-box" class="secret-card hidden">
+                <h3>🤖 VS Máquina</h3>
+                <p>La máquina ha elegido un personaje oculto. Haz preguntas de Sí o No para deducirlo.</p>
+                <button id="btn-new-cpu" class="btn-secondary">🔄 Nueva Partida CPU</button>
+                <div id="cpu-answer-log" class="answer-log">
+                    <p class="log-placeholder">Preguntas realizadas: 0. Haz clic en cualquier pregunta de abajo.</p>
+                </div>
+            </div>
+
+            <div class="panel-header">
+                <h2>Preguntas de Sí / No</h2>
+                <button id="btn-reset-filters" class="btn-danger">Limpiar Todo</button>
+            </div>
+            <p class="help-text">
+                <strong>Modo Tablero:</strong> Haz clic en una pregunta para <b>DESCARTAR (tachar)</b> a quienes cumplan esa característica.<br>
+                <strong>Modo CPU:</strong> Haz clic en una pregunta para obtener <b>SÍ</b> o <b>NO</b> y tachar automáticamente.
+            </p>
+
+            <!-- 1. GÉNERO -->
+            <details open>
+                <summary>1. Género</summary>
+                <div class="filter-group" id="filter-gender">
+                    <button class="filter-btn" data-category="gender" data-value="female">¿Es mujer?</button>
+                    <button class="filter-btn" data-category="gender" data-value="male">¿Es hombre?</button>
+                    <button class="filter-btn" data-category="gender" data-value="other">¿Es de otro género / IA / variante?</button>
+                </div>
+            </details>
+
+            <!-- 2. ARCO DE APARICIÓN -->
+            <details open>
+                <summary>2. Arco de Aparición</summary>
+                <div class="filter-group" id="filter-arcs"></div>
+            </details>
+
+            <!-- 3. GRUPO DE EDAD -->
+            <details open>
+                <summary>3. Edad en su Aparición</summary>
+                <div class="filter-group" id="filter-age-group">
+                    <button class="filter-btn" data-category="ageGroup" data-value="child">¿Es un niño o niña?</button>
+                    <button class="filter-btn" data-category="ageGroup" data-value="teen">¿Es un adolescente?</button>
+                    <button class="filter-btn" data-category="ageGroup" data-value="adult">¿Es un adulto o adulta?</button>
+                    <button class="filter-btn" data-category="ageGroup" data-value="elder">¿Es una persona mayor?</button>
+                </div>
+            </details>
+
+            <!-- 4. COLOR PRINCIPAL -->
+            <details open>
+                <summary>4. Color Principal</summary>
+                <div class="filter-group" id="filter-colors"></div>
+            </details>
+
+            <!-- 5. FACCIÓN / ORIGEN Y TIPO DE PERSONAJE -->
+            <details open>
+                <summary>5. Facción y Tipo de Entrada</summary>
+                <div class="filter-group" id="filter-factions"></div>
+                <div class="filter-group" id="filter-entry-type">
+                    <button class="filter-btn" data-category="entryType" data-value="canon">¿Es personaje canónico estándar?</button>
+                    <button class="filter-btn" data-category="entryType" data-value="alt">¿Es forma alternativa / genderbend / variante?</button>
+                    <button class="filter-btn" data-category="entryType" data-value="oc">¿Es personaje original (OC)?</button>
+                </div>
+            </details>
+        </aside>
+
+        <!-- PANEL DERECHO: Tablero de Dr. STONE -->
+        <section class="board-section">
+            <div class="board-toolbar">
+                <input type="text" id="search-character" placeholder="Buscar personaje por nombre, arco o color...">
+                <span id="counter-display">Restantes: 110 / 110</span>
+            </div>
+            <div id="loading-bar" class="loading-banner">Cargando elenco de Dr. STONE (110 personajes)...</div>
+            <div id="character-grid" class="character-grid"></div>
+        </section>
+    </main>
+
+    <script src="dr_stone_data.js"></script>
+    <script src="app.js"></script>
+    <script src="cpu_mode.js"></script>
+    <script src="i18n_en.js"></script>
+    <script src="en_mode.js"></script>
+</body>
+</html>
